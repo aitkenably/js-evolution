@@ -1,7 +1,17 @@
 'use strict'
 
- const db = require('./database-faux')
- 
+const process = require('process')
+const db = require('./database-faux')
+
+process.argv.forEach((val) => {
+  if(val === '-i')
+    db.makeInitFail = true
+  else if(val === '-c')
+    db.makeCreateFail = true
+  else if(val === '-s')
+    db.makeSelectFail = true
+})
+
 function initialize() {
   return new Promise(function(resolve, reject) {
     db.initialize(function(err) {
@@ -13,7 +23,6 @@ function initialize() {
     })
   })
 }
-
 
 function run(sql) {
   return new Promise(function(resolve, reject) {
@@ -41,10 +50,6 @@ function each(sql, row) {
   })
 }
 
-// db.makeInitFail = true
-// db.makeRunFail = true
-// db.makeEachFail = true
-
 initialize()
   .then(function() {
     console.log('Initialized database')
@@ -55,7 +60,7 @@ initialize()
     return each("SELECT name FROM users")
   })
   .then(function (rows) {
-    console.log("Listing users")
+    console.log("Listing users:")
     rows.forEach(element => { console.log(element) })
   })
 .catch(function (err) {

@@ -3,8 +3,8 @@
 module.exports = {
 
   makeInitFail : false,
-  makeRunFail  : false,
-  makeEachFail : false,
+  makeCreateFail  : false,
+  makeSelectFail : false,
    
   initialize: function(cb) {
     if (this.makeInitFail) {
@@ -15,7 +15,7 @@ module.exports = {
   },
 
   run: function(sql, cb) {
-    if (this.makeRunFail) {
+    if (this.makeCreateFail) {
       cb("Invalid create table statement")
     } else {
       cb()
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   each: function(sql, cb) {
-    if (this.makeEachFail) {
+    if (this.makeSelectFail) {
       cb("Invalid select statement", null)
     } else {
       ['user1', 'user2', 'user3'].forEach( (row) => cb(null, row))
