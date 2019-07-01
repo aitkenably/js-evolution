@@ -5,7 +5,7 @@ module.exports = {
   makeInitFail : false,
   makeRunFail  : false,
   makeEachFail : false,
-  
+   
   initialize: function(cb) {
     if (this.makeInitFail) {
       cb("Invalid database")

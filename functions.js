@@ -1,6 +1,6 @@
 'use strict'
 
- const db = require('./faux-database')
+ const db = require('./database-faux')
 
 // db.makeInitFail = true
 // db.makeRunFail = true
