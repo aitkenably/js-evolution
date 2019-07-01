@@ -14,19 +14,19 @@ process.argv.forEach((val) => {
 
  db.initialize(function(err) {
    if (err) {
-     console.log('ERROR: ' + err)
+     console.error('ERROR: ' + err)
    } else {
      console.log('Initialized database')
      db.run("CREATE TABLE users id INT, name VARCHAR(255)", function(err) {
        if (err) {
-         console.log('ERROR: ' + err)
+         console.error('ERROR: ' + err)
        }
        else {
         console.log('Created table users')
         console.log("Listing users:")
         db.each("SELECT name FROM users", function(err, row) {
           if (err) {
-            console.log('ERROR: ' + err)
+            console.error('ERROR: ' + err)
           } else {
             console.log(row)
           }

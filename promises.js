@@ -64,5 +64,5 @@ initialize()
     rows.forEach(element => { console.log(element) })
   })
 .catch(function (err) {
-  console.log('ERROR: ' + err)
+  console.error('ERROR: ' + err)
 })
