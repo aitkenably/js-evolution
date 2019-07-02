@@ -2,31 +2,31 @@
 
 module.exports = {
 
-  makeInitFail : false,
-  makeCreateFail  : false,
-  makeSelectFail : false,
-   
-  initialize: function(cb) {
+  makeInitFail: false,
+  makeCreateFail: false,
+  makeSelectFail: false,
+
+  initialize: function (callback) {
     if (this.makeInitFail) {
-      cb("Invalid database")
+      callback(new Error('Invalid database'))
     } else {
-      cb()
+      callback(null)
     }
   },
 
-  run: function(sql, cb) {
+  run: function (sql, callback) {
     if (this.makeCreateFail) {
-      cb("Invalid create table statement")
+      callback(new Error('Invalid create table statement'))
     } else {
-      cb()
+      callback(null)
     }
   },
 
-  each: function(sql, cb) {
+  each: function (sql, callback) {
     if (this.makeSelectFail) {
-      cb("Invalid select statement", null)
+      callback(new Error('Invalid select statement'), null)
     } else {
-      ['user1', 'user2', 'user3'].forEach( (row) => cb(null, row))
+      ['user1', 'user2', 'user3'].forEach((row) => callback(null, row))
     }
   }
 }
