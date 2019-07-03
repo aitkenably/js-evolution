@@ -1,18 +1,10 @@
 'use strict'
 
-const process = require('process')
 const { promisify } = require('util')
+const parseArgs = require('./args')
 const db = require('./database-faux')
 
-process.argv.forEach((val) => {
-  if (val === '-i') {
-    db.makeInitFail = true
-  } else if (val === '-c') {
-    db.makeCreateFail = true
-  } else if (val === '-s') {
-    db.makeSelectFail = true
-  }
-})
+parseArgs(db)
 
 const initialize = promisify(db.initialize).bind(db)
 const run = promisify(db.run).bind(db)

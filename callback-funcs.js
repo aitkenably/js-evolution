@@ -1,17 +1,9 @@
 'use strict'
 
-const process = require('process')
+const parseArgs = require('./args')
 const db = require('./database-faux')
 
-process.argv.forEach((val) => {
-  if (val === '-i') {
-    db.makeInitFail = true
-  } else if (val === '-c') {
-    db.makeCreateFail = true
-  } else if (val === '-s') {
-    db.makeSelectFail = true
-  }
-})
+parseArgs(db)
 
 function handleInit (err) {
   if (err) {
