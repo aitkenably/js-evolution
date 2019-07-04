@@ -6,8 +6,10 @@
 */
 
 const { promisify } = require('util')
-const parseArgs = require('./args')
+
 const db = require('./database-faux')
+const parseArgs = require('./args')
+const log = require('./log')
 
 // Parse our -i, -c, -s options to force db errors
 parseArgs(db)
@@ -46,15 +48,15 @@ function each (sql, row) {
 (async function () {
   try {
     await initialize()
-    console.log('Initialized database')
+    log.info('Initialized database')
 
     await run('CREATE TABLE users id INT, name VARCHAR(255)')
-    console.log('Created table users')
+    log.info('Created table users')
 
     let rows = await each('SELECT name FROM users')
-    console.log('Listing users:')
+    log.info('Selecting users')
     rows.forEach(element => { console.log(element) })
   } catch (err) {
-    console.error(err.message)
+    log.error(err.message)
   }
 })()

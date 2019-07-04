@@ -7,24 +7,25 @@
 
 const db = require('./database-faux')
 const parseArgs = require('./args')
+const log = require('./log')
 
 // Parse our -i, -c, -s options to force db errors
 parseArgs(db)
 
 db.initialize(function (err) {
   if (err) {
-    console.error(err.message)
+    log.error(err.message)
   } else {
-    console.log('Initialized database')
+    log.info('Initialized database')
     db.run('CREATE TABLE users id INT, name VARCHAR(255)', function (err) {
       if (err) {
-        console.error(err.message)
+        log.error(err.message)
       } else {
-        console.log('Created table users')
-        console.log('Listing users:')
+        log.info('Created table users')
+        log.info('Selecting users')
         db.each('SELECT name FROM users', function (err, row) {
           if (err) {
-            console.error(err.message)
+            log.error(err.message)
           } else {
             console.log(row)
           }
