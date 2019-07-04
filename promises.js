@@ -1,8 +1,15 @@
 'use strict'
 
+/*
+* Demonstrates program flow with promise chaining
+* by wrapping each of the database's callbacks
+* in a custom promise.
+*/
+
 const parseArgs = require('./args')
 const db = require('./database-faux')
 
+// Parse our -i, -c, -s options to force db errors
 parseArgs(db)
 
 function initialize () {
@@ -29,6 +36,10 @@ function run (sql) {
   })
 }
 
+// The each callback is called multiple times by the
+// database API (once for each row). Promises resolve
+// only once, so our wrapping promise returns all the
+// rows in an array.
 function each (sql, row) {
   return new Promise(function (resolve, reject) {
     const rows = []

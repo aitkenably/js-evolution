@@ -1,8 +1,14 @@
 'use strict'
 
+/*
+* Demonstrates program flow with explicitly named
+* callback functions.
+*/
+
 const parseArgs = require('./args')
 const db = require('./database-faux')
 
+// Parse our -i, -c, -s options to force db errors
 parseArgs(db)
 
 function handleInit (err) {

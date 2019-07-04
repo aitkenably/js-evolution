@@ -1,8 +1,14 @@
 'use strict'
 
+/*
+* Demonstrates program flow with nested callback
+* functions. (i.e. the pyramid of doom)
+*/
+
 const db = require('./database-faux')
 const parseArgs = require('./args')
 
+// Parse our -i, -c, -s options to force db errors
 parseArgs(db)
 
 db.initialize(function (err) {
