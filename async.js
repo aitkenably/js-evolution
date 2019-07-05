@@ -1,8 +1,8 @@
 'use strict'
 
 /*
-* Demonstrates program flow with using
-* async / await.
+* Demonstrates program flow using
+* async & await.
 */
 
 const { promisify } = require('util')
